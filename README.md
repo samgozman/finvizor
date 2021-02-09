@@ -1,0 +1,2 @@
+# finvizor
+Get finviz data 
