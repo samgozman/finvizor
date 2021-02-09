@@ -1,5 +1,4 @@
 const {
-    getPage,
     getStock
 } = require('./lib/stock')
 
