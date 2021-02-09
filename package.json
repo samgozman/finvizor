@@ -1,0 +1,27 @@
+{
+  "name": "finvizor",
+  "version": "1.0.0",
+  "description": "Get finviz data",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://samgozman@github.com/samgozman/finvizor.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/samgozman/finvizor/issues"
+  },
+  "homepage": "https://github.com/samgozman/finvizor#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.5",
+    "got": "^11.8.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
