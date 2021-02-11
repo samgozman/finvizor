@@ -3,15 +3,20 @@
   "version": "1.0.0",
   "description": "Get finviz data",
   "main": "index.js",
+    "directories": {
+    "lib": "lib"
+  },
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "test": "jest",
+    "test-local": "jest --watch"
   },
   "repository": {
     "type": "git",
     "url": "git+https://samgozman@github.com/samgozman/finvizor.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Sam Gozman <sam@gozman.space>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/samgozman/finvizor/issues"
@@ -23,6 +28,8 @@
     "lodash": "^4.17.20"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.20",
+    "jest": "^26.6.3",
     "nodemon": "^2.0.7"
   }
 }

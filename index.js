@@ -1,9 +1,11 @@
-const {
-    getStock
-} = require('./lib/stock')
+/**
+ * Finviz.com stock data
+ * ! Unofficial API
+ */
+const getStock = require('./lib/stock')
 
-const main = async () => {
-    const stock =  await getStock('SPCE')
-    console.log(stock)
+module.exports = {
+    stock: async (ticker) => {
+        return await getStock(ticker)
+    }
 }
-main()
