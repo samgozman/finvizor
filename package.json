@@ -1,7 +1,7 @@
 {
   "name": "finvizor",
   "version": "1.0.0",
-  "description": "Get finviz data",
+  "description": "Get finviz stock data in proper format",
   "main": "index.js",
     "directories": {
     "lib": "lib"
@@ -15,7 +15,11 @@
     "type": "git",
     "url": "git+https://samgozman@github.com/samgozman/finvizor.git"
   },
-  "keywords": [],
+  "keywords": [
+    "stock",
+    "financial",
+    "finviz"
+  ],
   "author": "Sam Gozman <sam@gozman.space>",
   "license": "MIT",
   "bugs": {
