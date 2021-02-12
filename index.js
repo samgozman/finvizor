@@ -76,8 +76,7 @@ const getStock = require('./lib/stock')
  * @property {number} prevClose Previous close
  * @property {boolean} shortable Stock available to sell short
  * @property {number} ltDebtEq Long Term Debt to Equity (mrq)
-//! BMO and AMC - need more details in stock object {{}}
- * @property {Date} earnings Earnings date BMO = Before Market Open, AMC = After Market Close
+ * @property {{date: Date, marketTime: string}} earnings Earnings date. marketTime: BMO = Before Market Open, AMC = After Market Close
  * @property {number} payout Dividend Payout Ratio (ttm) (%)
  * @property {number} avgVolume Average volume (3 month)
  * @property {number} price Current stock price
@@ -96,7 +95,7 @@ module.exports = {
      *
      * @async
      * @param {string} ticker Stock ticker (AAPL or TSLA, etc)
-     * @return {Stock} Full stock data object from finviz
+     * @return {Promise.<Stock>} Full stock data object from finviz
      */
     stock: async (ticker) => {
         return await getStock(ticker)
