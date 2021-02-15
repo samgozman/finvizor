@@ -76,7 +76,7 @@ const getStock = require('./lib/stock')
  * @property {number} prevClose Previous close
  * @property {boolean} shortable Stock available to sell short
  * @property {number} ltDebtEq Long Term Debt to Equity (mrq)
- * @property {{date: Date, marketTime: string}} earnings Earnings date. marketTime: BMO = Before Market Open, AMC = After Market Close
+ * @property {{date: number, marketTime: string}} earnings Earnings date (UTC time in milliseconds from 1970-01-01). marketTime: BMO = Before Market Open, AMC = After Market Close
  * @property {number} payout Dividend Payout Ratio (ttm) (%)
  * @property {number} avgVolume Average volume (3 month)
  * @property {number} price Current stock price

@@ -61,7 +61,7 @@ main()
   insiderOwn: 0.07,
   shsOutstand: 16940000000,
   ...
-  earnings: { date: 2021-01-26T21:00:00.000Z, marketTime: 'AMC' },
+  earnings: { date: 1611694800000, marketTime: 'AMC' },
   payout: 21.6,
   avgVolume: 103190000,
   price: 134.24,
