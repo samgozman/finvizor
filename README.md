@@ -1,4 +1,5 @@
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/samgozman/finvizor/finvizor%20Node.js) 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/380de0bf9a8e423a9eb7b2c51355c52b)](https://app.codacy.com/gh/samgozman/finvizor?utm_source=github.com&utm_medium=referral&utm_content=samgozman/finvizor&utm_campaign=Badge_Grade_Settings)
 [![npm](https://img.shields.io/npm/v/finvizor)](https://www.npmjs.com/package/finvizor)
 ![npm bundle size](https://img.shields.io/bundlephobia/min/finvizor)
 ![NPM](https://img.shields.io/npm/l/finvizor)
