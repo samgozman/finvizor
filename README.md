@@ -9,7 +9,7 @@ Get full financial data from **finviz**!
 ## Installation
 Install package from NPM
 
-```
+```bash
 npm install finvizor
 ```
 
