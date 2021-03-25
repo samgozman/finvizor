@@ -1,13 +1,15 @@
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/samgozman/finvizor/finvizor%20Node.js) 
+# finvizor
+
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/samgozman/finvizor/finvizor%20Node.js)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/380de0bf9a8e423a9eb7b2c51355c52b)](https://app.codacy.com/gh/samgozman/finvizor?utm_source=github.com&utm_medium=referral&utm_content=samgozman/finvizor&utm_campaign=Badge_Grade_Settings)
 [![npm](https://img.shields.io/npm/v/finvizor)](https://www.npmjs.com/package/finvizor)
 ![npm bundle size](https://img.shields.io/bundlephobia/min/finvizor)
 ![NPM](https://img.shields.io/npm/l/finvizor)
 
-# finvizor
 Get full financial data from **finviz**!
 
 ## Installation
+
 Install package from NPM
 
 ```bash
@@ -19,6 +21,7 @@ npm install finvizor
 The main differences and advantages in comparison with similar NPM modules are the more convenient presentation of the data returned by the function.
 
 ### Object Keys
+
 Object keys have been redesigned to make them look meaningful and readable. No more string keys in NPM modules! Camel case is used in key names only where it is needed. For instance 'P/E' => 'pe', 'Target price' => 'targetPrice' etc.
 
 ![Finviz parser](https://media.giphy.com/media/UzAtu9issLI0x7drmG/source.gif)
@@ -27,10 +30,11 @@ All keys (and there are more than 80 of them) have short descriptions taken from
 
 ### Object Values
 
-All numeric key values are presented as numerical values, rather than strings as default. Boolean values, ranges and the date of earnings are also parsed separately. 
+All numeric key values are presented as numerical values, rather than strings as default. Boolean values, ranges and the date of earnings are also parsed separately.
 All this is done so that the data from the site can be used in your code for calculations right out of the box!
 
 ## Usage
+
 Use **finvizor** in async functions
 
 ```javascript
@@ -45,6 +49,7 @@ main()
 ```
 
 ### Returns
+
 > await finvizor.stock('AAPL')
 
 ```javascript
