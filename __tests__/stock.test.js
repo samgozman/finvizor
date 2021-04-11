@@ -7,6 +7,9 @@ test('Should get stock response from finviz', async () => {
 
     // Assert that String data from the response is correct
     expect(stock.ticker).toBe('AAPL')
+
+    // Assert that insider transaction exists
+    expect(stock.insidersDeals.length).toBeGreaterThan(0)
 })
 
 test('Should get error response from finviz', async () => {

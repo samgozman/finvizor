@@ -5,6 +5,23 @@
 const getStock = require('./lib/stock')
 
 /**
+ * Insider trade obj
+ * 
+ * @typedef {Object} Insider
+ * @property {string} insiderTrading Insider names
+ * @property {string} insiderTradingLink Link to inseder personal Finviz page
+ * @property {string} relationship Insider position
+ * @property {string} date Date of trade
+ * @property {string} transaction Type of transaction (Sale, Buy, Option Exercise)
+ * @property {string} cost Avg cost per share
+ * @property {string} shares Number of shares
+ * @property {string} value Total value 
+ * @property {string} sharesTotal Amount of Securities Beneficially Owned Following Reported Transaction(s)
+ * @property {string} secForm4 SEC form date
+ * @property {string} secForm4Link Link to SEC form 4 
+ */
+
+/**
  * Stock object
  *
  * @typedef {Object} Stock
@@ -86,6 +103,7 @@ const getStock = require('./lib/stock')
  * @property {number} sma200 Distance from 200-Day Simple Moving Average (%)
  * @property {number} volume Volume
  * @property {number} change Performance (today) (%)
+ * @property {Array.<Insider>} insidersDeals Array of insiders tades
  */
 
 module.exports = {
