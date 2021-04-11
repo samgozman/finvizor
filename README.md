@@ -41,8 +41,8 @@ Use **finvizor** in async functions
 const finvizor = require('finvizor')
 
 const main = async () => {
-	const stock = await finvizor.stock('AAPL')
-	console.log(stock)
+  const stock = await finvizor.stock('AAPL')
+  console.log(stock)
 }
 
 main()
@@ -76,6 +76,22 @@ main()
   sma50: 2.49,
   sma200: 21.89,
   volume: 5659762,
-  change: -0.66
+  change: -0.66,
+  insidersDeals: [
+    {
+      insiderTrading: 'Williams Jeffrey E',
+      insiderTradingLink: 'https://finviz.com/insidertrading.ashx?oc=1496686&tc=7',
+      relationship: 'COO',
+      date: 'Apr 05',
+      transaction: 'Sale',
+      cost: '125.74',
+      shares: '133,867',
+      value: '16,832,437',
+      sharesTotal: '489,490',
+      secForm4: 'Apr 05 06:36 PM',
+      secForm4Link: 'http://www.sec.gov/Archives/edgar/data/320193/000032019321000046/xslF345X03/wf-form4_161766207883637.xml'
+    }
+    ...
+  ]
 }
 ```
