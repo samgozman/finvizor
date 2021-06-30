@@ -1,24 +1,24 @@
 export interface Insider {
     /** Insider names */
-    insiderTrading?: string;
+    insiderTrading: string;
     /** Link to inseder personal Finviz page */
-    insiderTradingLink?: string;
+    insiderTradingLink: string;
     /** Insider position */
-    relationship?: string;
+    relationship: string;
     /** Date of trade */
-    date?: string;
+    date: string;
     /** Type of transaction (Sale, Buy, Option Exercise) */
-    transaction?: string;
+    transaction: string;
     /** Avg cost per share */
-    cost?: string;
+    cost: string;
     /** Number of shares */
-    shares?: string;
+    shares: string;
     /** Total value */
-    value?: string;
+    value: string;
     /** Amount of Securities Beneficially Owned Following Reported Transaction(s) */
-    sharesTotal?: string;
+    sharesTotal: string;
     /** SEC form date */
-    secForm4?: string;
+    secForm4: string;
     /** Link to SEC form 4 */
-    secForm4Link?: string;
+    secForm4Link: string | undefined;
 }

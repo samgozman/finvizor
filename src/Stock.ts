@@ -1,5 +1,5 @@
 import { Insider } from './Insider';
-import { MarketTime } from './MarketTime';
+import { Earnings } from './Earnings';
 
 export interface Stock {
     /** Stock ticker */
@@ -139,7 +139,7 @@ export interface Stock {
     /** Long Term Debt to Equity (mrq) */
     ltDebtEq: number | null;
     /** Earnings date (UTC time in milliseconds from 1970-01-01). marketTime: BMO = Before Market Open, AMC = After Market Close */
-    earnings: { date: number | null; marketTime: MarketTime };
+    earnings: Earnings;
     /** Dividend Payout Ratio (ttm) (%) */
     payout: number | null;
     /** Average volume (3 month) */
@@ -163,5 +163,4 @@ export interface Stock {
 
     /** Error message */
     error?: any;
-    [key: string]: any;
 }
