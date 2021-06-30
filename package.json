@@ -1,40 +1,45 @@
 {
-  "name": "finvizor",
-  "version": "1.0.7",
-  "description": "Get finviz stock data in proper format",
-  "main": "index.js",
-  "directories": {
-    "lib": "lib"
-  },
-  "scripts": {
-    "dev": "nodemon index.js",
-    "test": "jest",
-    "test-local": "jest --watch"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://samgozman@github.com/samgozman/finvizor.git"
-  },
-  "keywords": [
-    "stock",
-    "financial",
-    "finviz"
-  ],
-  "author": "Sam Gozman <sam@gozman.space>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/samgozman/finvizor/issues"
-  },
-  "homepage": "https://github.com/samgozman/finvizor#readme",
-  "dependencies": {
-    "cheerio": "^1.0.0-rc.5",
-    "got": "^11.8.1",
-    "lodash": "^4.17.20"
-  },
-  "devDependencies": {
-    "@types/jest": "^26.0.20",
-    "eslint": "^7.21.0",
-    "jest": "^27.0.1",
-    "nodemon": "^2.0.7"
-  }
+    "name": "finvizor",
+    "version": "1.0.8",
+    "description": "Get finviz stock data in proper format",
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts",
+    "directories": {
+        "lib": "lib"
+    },
+    "scripts": {
+        "build": "tsc --build",
+        "test": "jest --config jestconfig.json"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://samgozman@github.com/samgozman/finvizor.git"
+    },
+    "keywords": [
+        "stock",
+        "financial",
+        "finviz"
+    ],
+    "author": "Sam Gozman <sam@gozman.space>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/samgozman/finvizor/issues"
+    },
+    "homepage": "https://github.com/samgozman/finvizor#readme",
+    "dependencies": {
+        "cheerio": "^1.0.0-rc.10",
+        "got": "^11.8.2",
+        "lodash": "^4.17.21"
+    },
+    "devDependencies": {
+        "@types/jest": "^26.0.23",
+        "@types/lodash": "^4.14.170",
+        "eslint": "^7.29.0",
+        "jest": "^27.0.6",
+        "ts-jest": "^27.0.3",
+        "typescript": "^4.3.4"
+    },
+    "files": [
+        "lib/**/*"
+    ]
 }
