@@ -2,6 +2,7 @@ import * as finvizor from '..';
 
 test('Should get stock response from finviz', async () => {
     let stock = await finvizor.stock('AAPL');
+    expect(stock.error).toBeUndefined();
     // Assert that response is not null at least
     expect(stock).not.toEqual({});
     // Assert that String data from the response is correct
@@ -24,5 +25,5 @@ test('Should get stock with extension (RDS.A) from finviz', async () => {
 test('Should get error response from finviz', async () => {
     let stock = await finvizor.stock('Kek lol');
     // Assert that response is not null at least
-    expect(stock.error).not.toBeUndefined();
+    expect(stock.error).toBeDefined();
 });
