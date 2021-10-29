@@ -4,7 +4,7 @@ import { Stock } from './Stock';
 import { Insider } from './Insider';
 import { capitalizeFirstLetters, fixKeys, fixValues, getStockPage, TempObject } from './utils';
 
-export const getStock = async (ticker: string = ''): Promise<Stock> => {
+export const getStock = async (ticker: string = ''): Promise<Stock | never> => {
     try {
         if (ticker === '') {
             throw new Error('No ticker provided!');
@@ -89,8 +89,6 @@ export const getStock = async (ticker: string = ''): Promise<Stock> => {
 
         return stock as Stock;
     } catch (error) {
-        return {
-            error: error.message,
-        } as Stock;
+        throw new Error(String(error));
     }
 };
