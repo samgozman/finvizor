@@ -23,7 +23,7 @@ export const getStock = async (ticker: string = ''): Promise<Stock | never> => {
             headersTable = $('.content table:nth-child(1) table:nth-child(1) > tbody'),
             mainTable = $('.content table.snapshot-table2:nth-child(2) > tbody').find('tr'),
             insidersTable = $(
-                '.content > .fv-container > table:nth-child(3) > tbody table.body-table > tbody'
+                '.content > .fv-container > table:nth-child(4) > tbody table.body-table > tbody'
             ).find('tr');
 
         // Parse non tabular data
