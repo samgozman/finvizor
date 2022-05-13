@@ -1,6 +1,6 @@
 {
     "name": "finvizor",
-    "version": "1.0.9",
+    "version": "1.1.0",
     "description": "Get finviz stock data in proper format",
     "main": "lib/index.js",
     "types": "lib/index.d.ts",
@@ -32,12 +32,12 @@
         "lodash": "^4.17.21"
     },
     "devDependencies": {
-        "@types/jest": "^27.0.2",
-        "@types/lodash": "^4.14.176",
-        "eslint": "^8.1.0",
-        "jest": "^27.3.1",
-        "ts-jest": "^27.0.7",
-        "typescript": "^4.4.4"
+        "@types/jest": "^27.5.1",
+        "@types/lodash": "^4.14.182",
+        "eslint": "^8.15.0",
+        "jest": "^28.1.0",
+        "ts-jest": "^28.0.2",
+        "typescript": "^4.6.4"
     },
     "files": [
         "lib/**/*"
