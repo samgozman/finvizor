@@ -10,8 +10,8 @@ test('Should get stock response from finviz', async () => {
     expect(stock.insidersDeals.length).toBeGreaterThan(0);
 });
 
-test('Should get stock with extension (BRK-A) from finviz', async () => {
-    let stock = await finvizor.stock('BRK-A');
+test('Should get stock with extension (BRK.A) from finviz', async () => {
+    let stock = await finvizor.stock('BRK.A');
     // Assert that response is not null at least
     expect(stock).not.toEqual({});
 
