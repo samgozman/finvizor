@@ -160,7 +160,4 @@ export interface Stock {
     change: number | null;
     /** Array of insiders tades */
     insidersDeals: Array<Insider>;
-
-    /** Error message */
-    error?: any;
 }

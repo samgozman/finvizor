@@ -1,29 +1,24 @@
-import * as finvizor from '..';
+import * as finvizor from '../src';
 
 test('Should get stock response from finviz', async () => {
     let stock = await finvizor.stock('AAPL');
-    expect(stock.error).toBeUndefined();
     // Assert that response is not null at least
     expect(stock).not.toEqual({});
     // Assert that String data from the response is correct
     expect(stock.ticker).toBe('AAPL');
-    // Not to be error
-    expect(stock.error).toBeUndefined();
     // Assert that insider transaction exists
     expect(stock.insidersDeals.length).toBeGreaterThan(0);
 });
 
-test('Should get stock with extension (RDS.A) from finviz', async () => {
-    let stock = await finvizor.stock('RDS.A');
+test('Should get stock with extension (BRK-A) from finviz', async () => {
+    let stock = await finvizor.stock('BRK-A');
     // Assert that response is not null at least
     expect(stock).not.toEqual({});
 
     // Assert that String data from the response is correct
-    expect(stock.ticker).toBe('RDS.A');
+    expect(stock.ticker).toBe('BRK.A');
 });
 
 test('Should get error response from finviz', async () => {
-    let stock = await finvizor.stock('Kek lol');
-    // Assert that response is not null at least
-    expect(stock.error).toBeDefined();
+    expect(finvizor.stock('Kek lol')).rejects.toThrowError();
 });
