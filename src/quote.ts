@@ -58,6 +58,14 @@ export const getStock = async (ticker: string = ''): Promise<Stock | never> => {
                     stock[key] = '';
                 }
             });
+
+            // 🩼 crutch injection 🩼
+            if (stock['Short Float / Ratio']) {
+                const sfrVal = (stock['Short Float / Ratio'] as String).split(' / ');
+                stock['Short Float'] = sfrVal[0];
+                stock['Short Ratio'] = sfrVal[1];
+                delete stock['Short Float / Ratio'];
+            }
         });
 
         stock = fixKeys(stock);
