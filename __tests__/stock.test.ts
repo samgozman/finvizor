@@ -6,6 +6,7 @@ test('Should get stock response from finviz', async () => {
     expect(stock).not.toEqual({});
     // Assert that String data from the response is correct
     expect(stock.ticker).toBe('AAPL');
+    expect(stock.sector).toBe('Technology');
     // Assert that insider transaction exists
     expect(stock.insidersDeals.length).toBeGreaterThan(0);
 });
