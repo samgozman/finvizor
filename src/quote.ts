@@ -41,7 +41,7 @@ export const getStock = async (ticker: string = ''): Promise<Stock | never> => {
         };
 
         // Iterate throw main financial table
-        Array.prototype.map.call(mainTable, (line) => {
+        for (const line in mainTable) {
             const elements = $(line).find('td');
             elements.each((i, td) => {
                 //          0    1    2    3
@@ -66,34 +66,33 @@ export const getStock = async (ticker: string = ''): Promise<Stock | never> => {
                 stock['Short Ratio'] = sfrVal[1];
                 delete stock['Short Float / Ratio'];
             }
-        });
+        }
 
         stock = fixKeys(stock);
         stock = fixValues(stock);
 
         // Create insiderDeals array
         stock.insidersDeals = [];
-        Array.prototype.map.call(insidersTable, (line, index) => {
+
+        // Note: 1 to skip header
+        for (let i = 1; i < insidersTable.length; i++) {
+            const line = insidersTable[i];
             const elements = $(line).find('td');
-            let insObj: Insider;
-            // Setup headers
-            if (index > 0) {
-                insObj = {
-                    insiderTrading: capitalizeFirstLetters($(elements[0]).text().toLowerCase()),
-                    insiderTradingLink: 'https://finviz.com/' + $(elements[0]).find('a').attr('href'),
-                    relationship: $(elements[1]).text(),
-                    date: $(elements[2]).text(),
-                    transaction: $(elements[3]).text(),
-                    cost: $(elements[4]).text(),
-                    shares: $(elements[5]).text(),
-                    value: $(elements[6]).text(),
-                    sharesTotal: $(elements[7]).text(),
-                    secForm4: $(elements[8]).text(),
-                    secForm4Link: $(elements[8]).find('a').attr('href'),
-                };
-                stock.insidersDeals.push(insObj);
-            }
-        });
+            let insObj: Insider = {
+                insiderTrading: capitalizeFirstLetters($(elements[0]).text().toLowerCase()),
+                insiderTradingLink: 'https://finviz.com/' + $(elements[0]).find('a').attr('href'),
+                relationship: $(elements[1]).text(),
+                date: $(elements[2]).text(),
+                transaction: $(elements[3]).text(),
+                cost: $(elements[4]).text(),
+                shares: $(elements[5]).text(),
+                value: $(elements[6]).text(),
+                sharesTotal: $(elements[7]).text(),
+                secForm4: $(elements[8]).text(),
+                secForm4Link: $(elements[8]).find('a').attr('href'),
+            };
+            stock.insidersDeals.push(insObj);
+        }
 
         return stock as Stock;
     } catch (error) {
