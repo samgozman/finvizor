@@ -20,10 +20,10 @@ export const getStock = async (ticker: string = ''): Promise<Stock | never> => {
 
         // Select page data
         const $ = cheerio(page, null, false),
-            headersTable = $('.content table:nth-child(1) table:nth-child(1) > tbody'),
-            mainTable = $('.content table.snapshot-table2:nth-child(2) > tbody').find('tr'),
+            headersTable = $('.content table.fullview-title > tbody'),
+            mainTable = $('.content div.snapshot-table-wrapper > table > tbody').find('tr'),
             insidersTable = $(
-                '.content > .fv-container > table:nth-child(3) > tbody table.body-table > tbody'
+                '.content .ticker-wrapper > div.fv-container > table > tbody > tr > td > div > table:nth-child(2) > tbody > tr:nth-child(13) > td > table > tbody'
             ).find('tr');
 
         // Parse non tabular data
@@ -40,8 +40,8 @@ export const getStock = async (ticker: string = ''): Promise<Stock | never> => {
             country: $(headersTable).find('tr:nth-child(3) > td > a:nth-child(3)').text(),
         };
 
-        // Iterate throw main financial table
-        Array.prototype.map.call(mainTable, (line) => {
+        // Iterate through main financial table
+        mainTable.map((i, line) => {
             const elements = $(line).find('td');
             elements.each((i, td) => {
                 //          0    1    2    3
@@ -49,8 +49,7 @@ export const getStock = async (ticker: string = ''): Promise<Stock | never> => {
                 if (i % 2) {
                     // Set values
                     const key = $(elements[i - 1]).text(),
-                        value = $(td).text();
-
+                        value = $(td).first().text();
                     stock[key] = value;
                 } else {
                     // Set keys
@@ -73,27 +72,26 @@ export const getStock = async (ticker: string = ''): Promise<Stock | never> => {
 
         // Create insiderDeals array
         stock.insidersDeals = [];
-        Array.prototype.map.call(insidersTable, (line, index) => {
+
+        // Note: 1 to skip header
+        for (let i = 1; i < insidersTable.length; i++) {
+            const line = insidersTable[i];
             const elements = $(line).find('td');
-            let insObj: Insider;
-            // Setup headers
-            if (index > 0) {
-                insObj = {
-                    insiderTrading: capitalizeFirstLetters($(elements[0]).text().toLowerCase()),
-                    insiderTradingLink: 'https://finviz.com/' + $(elements[0]).find('a').attr('href'),
-                    relationship: $(elements[1]).text(),
-                    date: $(elements[2]).text(),
-                    transaction: $(elements[3]).text(),
-                    cost: $(elements[4]).text(),
-                    shares: $(elements[5]).text(),
-                    value: $(elements[6]).text(),
-                    sharesTotal: $(elements[7]).text(),
-                    secForm4: $(elements[8]).text(),
-                    secForm4Link: $(elements[8]).find('a').attr('href'),
-                };
-                stock.insidersDeals.push(insObj);
-            }
-        });
+            let insObj: Insider = {
+                insiderTrading: capitalizeFirstLetters($(elements[0]).text().toLowerCase()),
+                insiderTradingLink: 'https://finviz.com/' + $(elements[0]).find('a').attr('href'),
+                relationship: $(elements[1]).text(),
+                date: $(elements[2]).text(),
+                transaction: $(elements[3]).text(),
+                cost: $(elements[4]).text(),
+                shares: $(elements[5]).text(),
+                value: $(elements[6]).text(),
+                sharesTotal: $(elements[7]).text(),
+                secForm4: $(elements[8]).text(),
+                secForm4Link: $(elements[8]).find('a').attr('href'),
+            };
+            stock.insidersDeals.push(insObj);
+        }
 
         return stock as Stock;
     } catch (error) {
