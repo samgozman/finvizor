@@ -29,10 +29,9 @@ export const getStock = async (ticker: string = ''): Promise<Stock | never> => {
         // Parse non tabular data
         let stock: TempObject = {
             ticker: $('#ticker').text().replace(/-/g, '.'),
-            name: $(headersTable).find('tr:nth-child(2) > td > a > b').text(),
-            site: $(headersTable).find('tr:nth-child(2) > td > a').attr('href'),
-            exchange: $('#ticker')
-                .next()
+            name: $(headersTable).find('tr > td > span:nth-child(2) > a > b').text(),
+            site: $(headersTable).find('tr > td > span:nth-child(2) > a').attr('href'),
+            exchange: $(headersTable).find('tr > td > .body-table')
                 .text()
                 .replace(/[^a-zA-Z]+/g, ''),
             sector: $(headersTable).find('tr:nth-child(2) > td > a:nth-child(1)').text(),
