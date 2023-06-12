@@ -35,9 +35,9 @@ export const getStock = async (ticker: string = ''): Promise<Stock | never> => {
                 .next()
                 .text()
                 .replace(/[^a-zA-Z]+/g, ''),
-            sector: $(headersTable).find('tr:nth-child(3) > td > a:nth-child(1)').text(),
-            industry: $(headersTable).find('tr:nth-child(3) > td > a:nth-child(2)').text(),
-            country: $(headersTable).find('tr:nth-child(3) > td > a:nth-child(3)').text(),
+            sector: $(headersTable).find('tr:nth-child(2) > td > a:nth-child(1)').text(),
+            industry: $(headersTable).find('tr:nth-child(2) > td > a:nth-child(2)').text(),
+            country: $(headersTable).find('tr:nth-child(2) > td > a:nth-child(3)').text(),
         };
 
         // Iterate through main financial table
