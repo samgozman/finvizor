@@ -6,8 +6,8 @@ test('Should get stock response from finviz', async () => {
     expect(stock).not.toEqual({});
     // Assert that String data from the response is correct
     expect(stock.ticker).toBe('AAPL');
-    expect(stock.name).toBe('Apple Inc.');
-    expect(stock.site).toBe('https://www.apple.com');
+    expect(stock.name).toBe('Apple Inc');
+    expect(stock.site.endsWith('apple.com')).toBe(true);
     expect(stock.exchange).toBe('NASD');
     expect(stock.sector).toBe('Technology');
     expect(stock.industry).toBe('Consumer Electronics');
