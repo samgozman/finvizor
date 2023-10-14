@@ -20,7 +20,9 @@ export const getStock = async (ticker: string = ''): Promise<Stock | never> => {
 
         // Select page data
         const $ = cheerio(page, null, false),
-            headersTable = $('.content table.fullview-title > tbody'),
+            headersTabLinks = $(
+                '.content > div.ticker-wrapper > div.fv-container > div.quote-links > div:nth-child(1)'
+            ).find('a.tab-link'),
             mainTable = $('.content div.snapshot-table-wrapper > table > tbody').find('tr'),
             insidersTable = $(
                 '.content .ticker-wrapper > div.fv-container > table > tbody > tr > td > div > table:nth-child(2) > tbody > tr:nth-child(13) > td > table > tbody'
@@ -28,15 +30,16 @@ export const getStock = async (ticker: string = ''): Promise<Stock | never> => {
 
         // Parse non tabular data
         let stock: TempObject = {
-            ticker: $('#ticker').text().replace(/-/g, '.'),
-            name: $(headersTable).find('tr > td > h1 > span > a').text(),
-            site: $(headersTable).find('tr > td > h1 > span > a').attr('href'),
-            exchange: $(headersTable).find('tr:nth-child(2) > td > a:nth-child(4)')
+            ticker: $('h1.quote-header_ticker-wrapper_ticker').text().replace(/-/g, '.'),
+            name: $('div.quote-header > div.quote-header_left > div > h2 > a').text().trim(),
+            site: $('div.quote-header > div.quote-header_left > div > h2 > a').attr('href'),
+            exchange: $(headersTabLinks)
+                .eq(3)
                 .text()
                 .replace(/[^a-zA-Z]+/g, ''),
-            sector: $(headersTable).find('tr:nth-child(2) > td > a:nth-child(1)').text(),
-            industry: $(headersTable).find('tr:nth-child(2) > td > a:nth-child(2)').text(),
-            country: $(headersTable).find('tr:nth-child(2) > td > a:nth-child(3)').text(),
+            sector: $(headersTabLinks).eq(0).text(),
+            industry: $(headersTabLinks).eq(1).text(),
+            country: $(headersTabLinks).eq(2).text(),
         };
 
         // Iterate through main financial table
