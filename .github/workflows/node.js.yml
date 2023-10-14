@@ -4,21 +4,21 @@ on:
     push:
         branches: [main]
     pull_request:
-        branches: [main,dev]
+        branches: [main, dev]
     schedule:
-      - cron: '0 0 * * 5' # every Friday at 00:00 UTC
+        - cron: '0 0 * * 5' # every Friday at 00:00 UTC
 
 jobs:
     build:
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                node: ['15', '16']
+                node: ['16', '18', '20']
         name: Node ${{ matrix.node }} sample
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v4
             - name: Setup node
-              uses: actions/setup-node@v2
+              uses: actions/setup-node@v3
               with:
                   node-version: ${{ matrix.node }}
             - run: npm install
