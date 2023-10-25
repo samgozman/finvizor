@@ -17,6 +17,7 @@ export const getStockPage = async (ticker: string): Promise<string> => {
         const response = await got('https://finviz.com/quote.ashx', {
             searchParams: {
                 t: ticker,
+                p: 'd',
             },
         });
         return response.body;
