@@ -1,7 +1,7 @@
 import * as finvizor from '../src';
 
 test('Should get stock response from finviz', async () => {
-    let stock = await finvizor.stock('AAPL');
+    const stock = await finvizor.stock('AAPL');
     // Assert that response is not null at least
     expect(stock).not.toEqual({});
     // Assert that String data from the response is correct
@@ -16,8 +16,19 @@ test('Should get stock response from finviz', async () => {
     expect(stock.insidersDeals.length).toBeGreaterThan(0);
 });
 
+test('Should get etf response from finviz', async () => {
+    const stock = await finvizor.stock('QQQ');
+    expect(stock).not.toEqual({});
+    expect(stock.ticker).toBe('QQQ');
+    expect(stock.name).toBe('Invesco QQQ Trust Series 1');
+    expect(stock.sector).toBe('Financial');
+    expect(stock.industry).toBe('Exchange Traded Fund');
+    expect(stock.country).toBe('USA');
+    expect(stock.price).toBeGreaterThan(0);
+});
+
 test('Should get stock with extension (BRK.A) from finviz', async () => {
-    let stock = await finvizor.stock('BRK.A');
+    const stock = await finvizor.stock('BRK.A');
     // Assert that response is not null at least
     expect(stock).not.toEqual({});
 

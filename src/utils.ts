@@ -32,8 +32,8 @@ export const getStockPage = async (ticker: string): Promise<string> => {
  * @returns {string}
  */
 export const capitalizeFirstLetters = (str: string): string => {
-    var splitStr = str.toLowerCase().split(' ');
-    for (var i = 0; i < splitStr.length; i++) {
+    const splitStr = str.toLowerCase().split(' ');
+    for (let i = 0; i < splitStr.length; i++) {
         splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
     }
     return splitStr.join(' ');
@@ -45,7 +45,14 @@ export const capitalizeFirstLetters = (str: string): string => {
  * @returns {Earnings} Returns the stored time value in milliseconds since midnight, January 1, 1970 UTC.
  */
 const convertDate = (dateString: string): Earnings => {
-    // Use only firts two statements from the date string
+    if (!dateString) {
+        return {
+            date: 0,
+            marketTime: '',
+        };
+    }
+
+    // Use only first two statements from the date string
     const dateArr = dateString.split(' '),
         currentDate = new Date(),
         date = new Date(dateArr[0] + dateArr[1]);
@@ -138,7 +145,7 @@ export const fixValues = (obj: TempObject): Stock => {
     //              and for range52W: '53.15 - 145.09' => { low: 53.15, high: 145.09 }
     range.forEach((k) => {
         // Remove '- ' and %
-        let rangeArr = obj[k].replace(/(%)|(-\s)/g, '').split(' ');
+        const rangeArr = obj[k].replace(/(%)|(-\s)/g, '').split(' ');
 
         if (k === 'volatility') {
             obj[k] = {
