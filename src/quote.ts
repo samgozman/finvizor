@@ -79,7 +79,7 @@ export const getStock = async (ticker: string = ''): Promise<Stock | never> => {
         for (let i = 1; i < insidersTable.length; i++) {
             const line = insidersTable[i];
             const elements = $(line).find('td');
-            let insObj: Insider = {
+            const insObj: Insider = {
                 insiderTrading: capitalizeFirstLetters($(elements[0]).text().toLowerCase()),
                 insiderTradingLink: 'https://finviz.com/' + $(elements[0]).find('a').attr('href'),
                 relationship: $(elements[1]).text(),
@@ -96,7 +96,7 @@ export const getStock = async (ticker: string = ''): Promise<Stock | never> => {
         }
 
         return stock as Stock;
-    } catch (error) {
-        throw new Error(String(error));
+    } catch (error: any) {
+        throw new Error(error);
     }
 };
