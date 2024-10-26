@@ -25,7 +25,7 @@ export const getStock = async (ticker: string = ''): Promise<Stock | never> => {
             ).find('a.tab-link'),
             mainTable = $('.content div.screener_snapshot-table-wrapper > table > tbody').find('tr'),
             insidersTable = $(
-                '.content .ticker-wrapper > div.fv-container > table > tbody > tr > td > div > table:nth-child(2) > tbody > tr:nth-child(13) > td > table > tbody'
+                '.content .ticker-wrapper > div.fv-container > table > tbody > tr > td > div > table:nth-child(2) > tbody > tr:last-child > td > table > tbody'
             ).find('tr');
 
         // Parse non tabular data
