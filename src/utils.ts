@@ -123,7 +123,7 @@ export const fixValues = (obj: TempObject): Stock => {
         if (!processed.includes(key) && !exclusions.includes(key) && !range.includes(key)) {
             let newValue: any = obj[key];
             // Remove whitespaces, commas and percentage characters
-            newValue = newValue.replace(/[\s]|(%)|(,)/g, '');
+            newValue = newValue.replace(/[\s]|(%)|(,)|(\()|(\))/g, '');
             // Fix if value ends with B (billions) or M (millions)
             if (newValue.match(/M/g)) {
                 newValue = Math.floor(+newValue.replace(/M/g, '') * 1.0e6);
