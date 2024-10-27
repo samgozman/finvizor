@@ -59,15 +59,20 @@ export const getStock = async (ticker: string = ''): Promise<Stock | never> => {
                     stock[key] = '';
                 }
             });
-
-            // 🩼 crutch injection 🩼
-            if (stock['Short Float / Ratio']) {
-                const sfrVal = (stock['Short Float / Ratio'] as String).split(' / ');
-                stock['Short Float'] = sfrVal[0];
-                stock['Short Ratio'] = sfrVal[1];
-                delete stock['Short Float / Ratio'];
-            }
         });
+
+        // 🩼 crutch injection 🩼
+        if (
+            stock['Dividend Est.'] !== undefined &&
+            stock['Dividend Est.'] !== '' &&
+            stock['Dividend Est.'] !== '-'
+        ) {
+            // split value like 0.99 (0.43%) to 0.99 and (0.43%)
+            stock['Dividend'] = (stock['Dividend Est.'] as string).split(' ')[0];
+            stock['Dividend Percent'] = (stock['Dividend Est.'] as string).split(' ')[1];
+            delete stock['Dividend Est.'];
+            delete stock['Dividend TTM'];
+        }
 
         stock = fixKeys(stock);
         stock = fixValues(stock);

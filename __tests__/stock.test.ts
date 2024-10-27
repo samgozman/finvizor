@@ -12,6 +12,15 @@ test('Should get stock response from finviz', async () => {
     expect(stock.sector).toBe('Technology');
     expect(stock.industry).toBe('Consumer Electronics');
     expect(stock.country).toBe('USA');
+    expect(stock.dividend).toBeGreaterThan(0);
+    expect(stock.dividendPercent).toBeGreaterThan(0);
+    expect(stock.price).toBeGreaterThan(0);
+    expect(stock.pe).toBeGreaterThan(0);
+    expect(stock.shsOutstand).toBeGreaterThan(0);
+    expect(stock.marketCap).toBeGreaterThan(0);
+    expect(stock.shortFloat).toBeGreaterThan(0);
+    expect(stock.shortRatio).toBeGreaterThan(0);
+
     // Assert that insider transaction exists
     expect(stock.insidersDeals.length).toBeGreaterThan(0);
 });
@@ -37,5 +46,5 @@ test('Should get stock with extension (BRK.A) from finviz', async () => {
 });
 
 test('Should get error response from finviz', async () => {
-    expect(finvizor.stock('Kek lol')).rejects.toThrowError();
+    expect(finvizor.stock('Kek lol')).rejects.toThrow();
 });
