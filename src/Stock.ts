@@ -82,8 +82,6 @@ export interface Stock {
     epsNext5Y: number | null;
     /** Return on Equity (ttm) (%) */
     roe: number | null;
-    /** 52-Week trading range */
-    range52W: { low: number | null; high: number | null };
     /** Performance (Year To Date) (%) */
     perfYtd: number | null;
     /** Dividend (annual) */
