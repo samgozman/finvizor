@@ -142,20 +142,13 @@ export const fixValues = (obj: TempObject): Stock => {
     });
 
     // Fix range values for volatility: '1.57% 2.63%' => { week: 1.57, month: 2.63 }
-    //              and for range52W: '53.15 - 145.09' => { low: 53.15, high: 145.09 }
     range.forEach((k) => {
-        // Remove '- ' and %
-        const rangeArr = obj[k].replace(/(%)|(-\s)/g, '').split(' ');
-
         if (k === 'volatility') {
+            const rangeArr = obj[k].replace(/(%)|(-\s)/g, '').split(' ');
+
             obj[k] = {
                 week: +rangeArr[0],
                 month: +rangeArr[1],
-            };
-        } else {
-            obj[k] = {
-                low: +rangeArr[0],
-                high: +rangeArr[1],
             };
         }
     });
