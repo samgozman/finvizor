@@ -116,7 +116,7 @@ export const fixValues = (obj: TempObject): Stock => {
     const exclusions = ['earnings', 'shortable', 'optionable'];
 
     // Keys that need to be processed as range values (low high)
-    const range = ['range52W', 'volatility'];
+    const range = ['volatility'];
 
     // Fix numeric values
     Object.keys(obj).forEach((key) => {
