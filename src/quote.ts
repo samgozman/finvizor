@@ -21,7 +21,7 @@ export const getStock = async (ticker: string = ''): Promise<Stock | never> => {
         // Select page data
         const $ = cheerio(page, null, false),
             headersTabLinks = $(
-                '.content > div.ticker-wrapper > div.fv-container div.quote-links > div:nth-child(1)'
+                '.content > div > div:nth-child(1) > div > div > div.quote-links > div:nth-child(1)'
             ).find('a.tab-link'),
             mainTable = $('.content div.screener_snapshot-table-wrapper > table > tbody').find('tr'),
             insidersTable = $(
