@@ -2,6 +2,11 @@ name: Publish finvizor package
 on:
     release:
         types: [published]
+
+permissions:
+  id-token: write  # Required for OIDC authentication
+  contents: read
+
 jobs:
     build:
         runs-on: ubuntu-latest
@@ -11,8 +16,7 @@ jobs:
             - uses: actions/setup-node@v6
               with:
                   node-version: '18.x'
+                  registry-url: 'https://registry.npmjs.org'
             - run: npm install
             - run: npm run build
             - run: npm publish
-              env:
-                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
