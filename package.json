@@ -13,7 +13,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://samgozman@github.com/samgozman/finvizor.git"
+        "url": "git+https://github.com/samgozman/finvizor.git"
     },
     "keywords": [
         "stock",
