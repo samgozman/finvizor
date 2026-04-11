@@ -24,9 +24,7 @@ export const getStock = async (ticker: string = ''): Promise<Stock | never> => {
                 '.content > div > div:nth-child(1) > div > div > div.quote-links > div:nth-child(1)'
             ).find('a.tab-link'),
             mainTable = $('.content div.screener_snapshot-table-wrapper > table > tbody').find('tr'),
-            insidersTable = $(
-                '.content .ticker-wrapper > div.fv-container > table > tbody > tr > td > div > table:nth-child(2) > tbody > tr:last-child > td > table > tbody'
-            ).find('tr');
+            insidersTable = $('tr.fv-insider-row');
 
         // Parse non tabular data
         let stock: TempObject = {
@@ -80,8 +78,7 @@ export const getStock = async (ticker: string = ''): Promise<Stock | never> => {
         // Create insiderDeals array
         stock.insidersDeals = [];
 
-        // Note: 1 to skip header
-        for (let i = 1; i < insidersTable.length; i++) {
+        for (let i = 0; i < insidersTable.length; i++) {
             const line = insidersTable[i];
             const elements = $(line).find('td');
             const insObj: Insider = {
