@@ -20,6 +20,15 @@ test('Should get stock response from finviz', async () => {
     expect(stock.marketCap).toBeGreaterThan(0);
     expect(stock.shortFloat).toBeGreaterThan(0);
     expect(stock.shortRatio).toBeGreaterThan(0);
+    expect(typeof stock.high52W).toBe('number');
+    expect(typeof stock.low52W).toBe('number');
+    expect(typeof stock.epsPast5Y).toBe('number');
+    expect(typeof stock.salesPast5Y).toBe('number');
+    expect(typeof stock.roi).toBe('number');
+    expect(stock.change).not.toBeUndefined();
+    expect(stock.optionable).toBe(true);
+    expect(stock.shortable).toBe(true);
+    expect(stock.earnings.date).toBeGreaterThan(0);
 
     // Assert that insider transaction exists
     expect(stock.insidersDeals.length).toBeGreaterThan(0);
