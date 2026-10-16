@@ -14,10 +14,15 @@ export interface TempObject {
  */
 export const getStockPage = async (ticker: string): Promise<string> => {
     try {
-        const response = await got('https://finviz.com/quote.ashx', {
+        const response = await got('https://finviz.com/quote', {
             searchParams: {
                 t: ticker,
                 p: 'd',
+            },
+            headers: {
+                // Cloudflare serves a JS challenge (403) to non-browser user agents
+                'user-agent':
+                    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
             },
         });
         return response.body;

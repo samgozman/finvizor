@@ -90,7 +90,7 @@ export interface Stock {
     pfcf: number | null;
     /** Annual EPS growth past 5 years (%) */
     epsPast5Y: number | null;
-    /** Return on Investment (ttm) (%) */
+    /** Return on Invested Capital (ttm) (%). Finviz replaced ROI with ROIC */
     roi: number | null;
     /** Distance from 52-Week High (%) */
     high52W: number | null;

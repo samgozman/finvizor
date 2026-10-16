@@ -20,24 +20,29 @@ export const getStock = async (ticker: string = ''): Promise<Stock | never> => {
 
         // Select page data
         const $ = cheerio(page, null, false),
-            headersTabLinks = $(
-                '.content > div > div:nth-child(1) > div > div > div.quote-links > div:nth-child(1)'
-            ).find('a.tab-link'),
+            companyLink = $('h2.quote-header_ticker-wrapper_company > a'),
+            headerCategories = $('div.quote-header_categories > a.quote-header_category'),
             mainTable = $('.content div.screener_snapshot-table-wrapper > table > tbody').find('tr'),
             insidersTable = $('tr.fv-insider-row');
+
+        // Header categories are screener links like 'screener?v=111&f=sec_technology',
+        // matched by filter prefix since their position varies (e.g. market cap link is optional)
+        const headerCategory = (filter: string): string =>
+            headerCategories
+                .filter((i, a) => ($(a).attr('href') ?? '').includes(`f=${filter}_`))
+                .first()
+                .text()
+                .trim();
 
         // Parse non tabular data
         let stock: TempObject = {
             ticker: $('h1.quote-header_ticker-wrapper_ticker').text().replace(/-/g, '.'),
-            name: $('div.quote-header > div.quote-header_left > div > h2 > a').text().trim(),
-            site: $('div.quote-header > div.quote-header_left > div > h2 > a').attr('href'),
-            exchange: $(headersTabLinks)
-                .eq(3)
-                .text()
-                .replace(/[^a-zA-Z]+/g, ''),
-            sector: $(headersTabLinks).eq(0).text(),
-            industry: $(headersTabLinks).eq(1).text(),
-            country: $(headersTabLinks).eq(2).text(),
+            name: companyLink.text().trim(),
+            site: companyLink.attr('href'),
+            exchange: headerCategory('exch').replace(/[^a-zA-Z]+/g, ''),
+            sector: headerCategory('sec'),
+            industry: headerCategory('ind'),
+            country: headerCategory('geo'),
         };
 
         // Iterate through main financial table
@@ -71,6 +76,42 @@ export const getStock = async (ticker: string = ''): Promise<Stock | never> => {
             delete stock['Dividend Est.'];
             delete stock['Dividend TTM'];
         }
+
+        // 🩼 map merged and renamed snapshot rows back to the Stock schema 🩼
+        const lastWord = (value: string): string => value.trim().split(/\s+/).pop() as string;
+        // '6.89% 17.91%' => '17.91%' (3Y and 5Y values in one row)
+        // '348.15 -1.01%' => '-1.01%' (52W price and distance from it in one row)
+        const lastWordRows: Record<string, string> = {
+            'EPS past 3/5Y': 'EPS past 5Y',
+            'Sales past 3/5Y': 'Sales past 5Y',
+            '52W High': '52W High',
+            '52W Low': '52W Low',
+        };
+        Object.entries(lastWordRows).forEach(([from, to]) => {
+            if (stock[from] !== undefined) {
+                const value = lastWord(stock[from]);
+                delete stock[from];
+                stock[to] = value;
+            }
+        });
+        // 'Yes / No' => Optionable: 'Yes', Shortable: 'No'
+        if (stock['Option/Short'] !== undefined) {
+            const [optionable, shortable] = (stock['Option/Short'] as string).split('/');
+            stock['Optionable'] = optionable.trim();
+            stock['Shortable'] = (shortable ?? '').trim();
+            delete stock['Option/Short'];
+        }
+        const renamedRows: Record<string, string> = {
+            'Change %': 'Change',
+            // Finviz replaced ROI with ROIC
+            ROIC: 'ROI',
+        };
+        Object.entries(renamedRows).forEach(([from, to]) => {
+            if (stock[from] !== undefined) {
+                stock[to] = stock[from];
+                delete stock[from];
+            }
+        });
 
         stock = fixKeys(stock);
         stock = fixValues(stock);
